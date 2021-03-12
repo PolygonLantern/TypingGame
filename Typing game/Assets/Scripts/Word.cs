@@ -24,6 +24,7 @@ public class Word
    public void InputChar()
    {
       charIndex++;
+      displayWord.RemoveChar(charIndex);
    }
 
    public bool WordTyped()
@@ -32,7 +33,7 @@ public class Word
 
       if (wordTyped)
       {
-         //remove from the screen
+         displayWord.RemoveWord();
       }
 
       return wordTyped;
