@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 public class DisplayWord : MonoBehaviour
 {
-    public TextMeshProUGUI text;
+    public TextMeshPro text;
     private int _firstIndex = 0;
     private string _redColour = "<color=red>";
     private string _whiteColour = "<color=white>";
