@@ -8,6 +8,7 @@ public class SingletonManager : MonoBehaviour
 
     public EventSystem EventSystem;
     public GameManager GameManager;
+    public WordManager WordManager;
     
     private void Awake()
     {

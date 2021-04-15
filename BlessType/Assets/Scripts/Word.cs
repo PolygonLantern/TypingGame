@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 [System.Serializable]
 public class Word
 {
@@ -30,13 +27,15 @@ public class Word
 
    public bool WordTyped()
    {
-      bool wordTyped = charIndex >= word.Length;
+      bool wordTyped = charIndex >= word.Length || WordManager.TimesFailedAWord >= 3;
 
       if (wordTyped)
       {
          displayWord.RemoveWord();
+         WordManager.TimesFailedAWord = 0;
       }
-
+      
       return wordTyped;
    }
+   
 }

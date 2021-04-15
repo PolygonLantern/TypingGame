@@ -33,11 +33,7 @@ public class GameManager : MonoBehaviour
          {
             yPosition += 2.5f;
          }
-         else
-         {
-            
-         }
-         
+
          Vector3 wordPosition = enemy.GetComponent<DisplayWord>().text.rectTransform.position;
          Vector3 newWordPosition = new Vector3(wordPosition.x, yPosition , wordPosition.z);
          enemy.GetComponent<DisplayWord>().text.rectTransform.position = newWordPosition;
@@ -49,8 +45,14 @@ public class GameManager : MonoBehaviour
       _enemyPosition.Add(new Vector2(GetEnemyPosition(enemy).x, GetEnemyPosition(enemy).z));
    }
 
+   public void ClearPositionList()
+   {
+      _enemyPosition.Clear();
+   }
    Vector3 GetEnemyPosition(GameObject enemy)
    {
+      if (enemy == null) return Vector3.zero;
+      
       return enemy.transform.position;
    }
    

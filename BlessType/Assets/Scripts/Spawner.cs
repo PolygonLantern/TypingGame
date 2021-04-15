@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     {
         word.transform.position = new Vector3(Random.Range(0, 20), .5f, Random.Range(0, 20));
         word.GetComponent<WordMat>().wordId = id;
-        word.GetComponent<EnemyController>().speed = Random.Range(2, 6);
+        word.GetComponent<EnemyController>().speed = Random.Range(1,2);
         return word.GetComponent<DisplayWord>();
     }
 

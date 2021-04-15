@@ -281,6 +281,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   words: []
+  activeWord:
+    id: 0
+    word: 
 --- !u!4 &347262358
 Transform:
   m_ObjectHideFlags: 0
@@ -731,6 +734,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 19a785d4934d09e46a3e5fd311779beb, type: 2}
   EventSystem: {fileID: 1776443868}
   GameManager: {fileID: 347262360}
+  WordManager: {fileID: 347262357}
 --- !u!4 &1023174329
 Transform:
   m_ObjectHideFlags: 0
@@ -984,7 +988,7 @@ GameObject:
   - component: {fileID: 1978833417}
   - component: {fileID: 1978833416}
   - component: {fileID: 1978833415}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
