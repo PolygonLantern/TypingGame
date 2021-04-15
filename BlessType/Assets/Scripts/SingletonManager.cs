@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SingletonManager : MonoBehaviour
 {
-    public static SingletonManager i;
+    public static SingletonManager Instance;
 
     public Material[] materials;
 
+    public EventSystem EventSystem;
+    public GameManager GameManager;
+    
     private void Awake()
     {
-        if (i != null)
+        if (Instance != null)
         {
             Destroy(gameObject);    
         }
         else
         {
-            i = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
     }
-    
 }

@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    Manager _manager;
+    WordManager _wordManager;
 
     private void Start()
     {
-        _manager = GetComponent<Manager>();
+        _wordManager = GetComponent<WordManager>();
     }
 
     // Update is called once per frame
@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour
     {
         foreach (char key in Input.inputString)
         {
-            _manager.TypeLetter(key);
+            _wordManager.TypeLetter(key);
         }
     }
 }

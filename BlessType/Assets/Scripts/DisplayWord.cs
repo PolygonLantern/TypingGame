@@ -10,13 +10,11 @@ public class DisplayWord : MonoBehaviour
     private int _firstIndex = 0;
     private string _redColour = "<color=red>";
     private string _whiteColour = "<color=white>";
-    //private Renderer _renderer;
     private SingletonManager _singletonManager;
     
     private void Start()
     {
-        _singletonManager = SingletonManager.i;
-        //_renderer = GetComponent<Renderer>();
+        _singletonManager = SingletonManager.Instance;
     }
 
     public void SetWord(string word)
@@ -42,8 +40,7 @@ public class DisplayWord : MonoBehaviour
 
     public void RemoveWord()
     {
-        //Destroy(gameObject);
-        if (Manager.TimesFailedAWord >= 3)
+        if (WordManager.TimesFailedAWord >= 3)
         {
             ChangeToMistakenMaterial(gameObject);
         }
@@ -52,24 +49,26 @@ public class DisplayWord : MonoBehaviour
             ChangeToCorrectMaterial(gameObject);
         }
         HasCompletedSuccessfully = true;
-        Manager.TimesFailedAWord = 0;
-
-
+        WordManager.TimesFailedAWord = 0;
+        
+        Destroy(gameObject, .2f);
     }
 
-    Material ChangeToMistakenMaterial( GameObject word)
+    void ChangeToMistakenMaterial(GameObject word)
     {
-        return word.GetComponent<Renderer>().material = _singletonManager.materials[2];
+        GameManager.Mistakes++;
+        word.GetComponent<Renderer>().material = _singletonManager.materials[2];
     }
     
-    Material ChangeToTypingMaterial(GameObject word)
+    void ChangeToTypingMaterial(GameObject word)
     {
-        return word.GetComponent<Renderer>().material = _singletonManager.materials[0];
+        word.GetComponent<Renderer>().material = _singletonManager.materials[0];
     }
      
-    Material ChangeToCorrectMaterial(GameObject word)
+    void ChangeToCorrectMaterial(GameObject word)
     {
-        return word.GetComponent<Renderer>().material = _singletonManager.materials[1];
+        GameManager.Score++;
+        word.GetComponent<Renderer>().material = _singletonManager.materials[1];
     }
     
 }

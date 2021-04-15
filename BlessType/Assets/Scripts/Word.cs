@@ -9,8 +9,6 @@ public class Word
    private int charIndex;
    private DisplayWord displayWord;
    
-   
-   
    public Word(string _word, DisplayWord _displayWord, int _id)
    {
       word = _word;
