@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EventSystem : MonoBehaviour
 {
-    public Action SpawnWords;
+    public Action<int> SpawnWords;
     public Action UpdateTextHeights;
-    public Action DeleteTextObjects;
-    public void SpawnWord()
+    public Action<int> DeleteTextObjects;
+    public Action<string> GetPokemonName;
+    public void SpawnWord(int amount)
     {
-        SpawnWords?.Invoke();
+        SpawnWords?.Invoke(amount);
     }
 
     public void UpdateTextHeight()
@@ -17,8 +18,13 @@ public class EventSystem : MonoBehaviour
         UpdateTextHeights?.Invoke();
     }
 
-    public void DeleteTextObject()
+    public void DeleteTextObject(int id)
     {
-        DeleteTextObjects?.Invoke();
+        DeleteTextObjects?.Invoke(id);
+    }
+
+    public void GetName(string str)
+    {
+        GetPokemonName?.Invoke(str);
     }
 }

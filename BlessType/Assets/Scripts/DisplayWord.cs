@@ -8,6 +8,8 @@ public class DisplayWord : MonoBehaviour
 {
     // Reference to the 3D text
     public TextMeshPro text;
+
+    public int id;
     
     // Index variable that will show at which character the player is
     private int _firstIndex = 0;
@@ -81,7 +83,6 @@ public class DisplayWord : MonoBehaviour
         }
         
         WordManager.TimesFailedAWord = 0;
-        _singletonManager.EventSystem.UpdateTextHeight();
         Destroy(gameObject, .2f);
     }
 

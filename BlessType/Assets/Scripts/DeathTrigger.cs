@@ -25,6 +25,9 @@ public class DeathTrigger : MonoBehaviour
         // Increase the mistakes counter
         GameManager.Mistakes++;
         
+        _singletonManager.GameManager.RemoveWordFromDictionary(other.GetComponent<DisplayWord>().id);
+        _singletonManager.WordManager.RemoveWordFromList(other.gameObject);
+        
         // Destroys the gameObject in 1 second
         Destroy(other.gameObject, 1f);
     }

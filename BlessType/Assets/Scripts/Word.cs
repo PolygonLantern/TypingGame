@@ -30,7 +30,8 @@ public class Word
       bool wordTyped = charIndex >= word.Length || WordManager.TimesFailedAWord >= 3;
 
       if (wordTyped)
-      {
+      {  
+         
          displayWord.RemoveWord();
          WordManager.TimesFailedAWord = 0;
       }
