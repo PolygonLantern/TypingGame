@@ -29,6 +29,6 @@ public class DeathTrigger : MonoBehaviour
         _singletonManager.WordManager.RemoveWordFromList(other.gameObject);
         
         // Destroys the gameObject in 1 second
-        Destroy(other.gameObject, 1f);
+        Destroy(other.gameObject);
     }
 }

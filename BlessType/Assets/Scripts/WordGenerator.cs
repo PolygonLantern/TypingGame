@@ -6,14 +6,15 @@ using UnityEngine.Networking;
 using SimpleJSON;
 using Random = UnityEngine.Random;
 
-[DefaultExecutionOrder(-1)]
+[DefaultExecutionOrder(-2)]
 public class WordGenerator : MonoBehaviour
 {
-    /*private string _pokeName;
-
-    private SingletonManager _singletonManager;*/
+    private string _pokeName;
     
-    private static string[] _words =
+    public List<string> pokemons = new List<string>();
+
+    public static bool IsReady;
+    /*private static string[] _words =
     {
         "prick", "blush", "wiry", "needy", "general", "impress",
         "odd", "button", "beg", "enjoy", "beginner", "confused", "strong", "lace", "festive",
@@ -29,57 +30,55 @@ public class WordGenerator : MonoBehaviour
         int randomIndex = Random.Range(0, _words.Length);
         string randomWord = _words[randomIndex];
         return randomWord;
-    }
-    /*private void Start()
+    }*/
+    public string GetRandomName()
     {
-        _singletonManager = SingletonManager.Instance;
-
-        _singletonManager.EventSystem.GetPokemonName += ctx =>
-        {
-            _pokeName = ctx;
-            Debug.Log(_pokeName);
-        };
+        int randomIndex = Random.Range(0, pokemons.Count);
+        string randomWord = pokemons[randomIndex];
+        return randomWord;
     }
 
-    private void OnDisable()
+    public void LoadPokemon()
     {
-        _singletonManager.EventSystem.GetPokemonName -= ctx =>
-        {
-            _pokeName = ctx;
-        };
+        StartCoroutine(GetPokemonAtIndex());
     }
 
     private readonly string _pokeBaseURL = "https://pokeapi.co/api/v2/";
 
-    public string GetRandomWord()
+ 
+    IEnumerator GetPokemonAtIndex()
     {
         int randomPokemon = Random.Range(1, 899);
-
-        StartCoroutine(GetPokemonAtIndex(randomPokemon)); 
-    }
-
-    IEnumerator GetPokemonAtIndex(int randomPokemon)
-    {
-        string pokemonURL = _pokeBaseURL + "pokemon/" + randomPokemon.ToString();
-        UnityWebRequest pokeInfoRequest = UnityWebRequest.Get(pokemonURL);
-
-        yield return pokeInfoRequest.SendWebRequest();
-
-        if (pokeInfoRequest.isNetworkError || pokeInfoRequest.isHttpError)
+        for (int i = 0; i < 50; i++)
         {
-            Debug.LogError(pokeInfoRequest.error);
-            yield break;
+            string pokemonURL = _pokeBaseURL + "pokemon/" + randomPokemon;
+            UnityWebRequest pokeInfoRequest = UnityWebRequest.Get(pokemonURL);
+
+            yield return pokeInfoRequest.SendWebRequest();
+
+            if (pokeInfoRequest.isNetworkError || pokeInfoRequest.isHttpError)
+            {
+                Debug.LogError(pokeInfoRequest.error);
+                yield break;
+            }
+
+            JSONNode pokeInfo = JSON.Parse(pokeInfoRequest.downloadHandler.text);
+
+
+
+            yield return StartCoroutine(GetPokemonName(pokeInfo["name"], value => pokemons.Add(value)));
+            randomPokemon = Random.Range(1, 899);
         }
 
-        JSONNode pokeInfo = JSON.Parse(pokeInfoRequest.downloadHandler.text);
-        
-        string retrievedName = pokeInfo["name"];
-
-        _singletonManager.EventSystem.GetName(retrievedName);
-
-        yield return null;
+        IsReady = true;
     }
-    */
+
+    IEnumerator GetPokemonName(string s, Action<string> result)
+    {
+        yield return new WaitForSeconds(.001f);
+        string test = s;
+        result(test);
+    }
     
     
 }

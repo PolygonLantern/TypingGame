@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
 [DefaultExecutionOrder(-5)]
 public class SingletonManager : MonoBehaviour
 {
@@ -21,6 +24,25 @@ public class SingletonManager : MonoBehaviour
         else
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnFinishedLoading;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnFinishedLoading;
+    }
+
+    void OnFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        EventSystem = FindObjectOfType<EventSystem>();
+        GameManager = FindObjectOfType<GameManager>();
+        WordManager = FindObjectOfType<WordManager>();
+        UIManager = FindObjectOfType<UIManager>();
     }
 }

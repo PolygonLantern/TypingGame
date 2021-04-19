@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 {
    public static int Score;
    public static int Mistakes;
-   float _waitUntilNextWave = 10f;
+   float _waitUntilNextWave = 5f;
    public GameState gameState;
 
    private List<Vector2> _enemyPosition = new List<Vector2>();
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
       {
          if (_enemyPosition[i].y <= _enemyPosition[count - 1].y && WordManager.test)
          {
-            yPosition += 1.3f;
+            yPosition += 2f;
 
             if (!_currentPositions.ContainsKey(enemyDw.id))
             {
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-               yPosition = _currentPositions[enemyDw.id] - 0.1f;
+               yPosition = _currentPositions[enemyDw.id] - .15f;
                _currentPositions[enemyDw.id] = yPosition;
             }
             
@@ -124,12 +124,12 @@ public class GameManager : MonoBehaviour
 
    public IEnumerator StartWave()
    {
-
+      
       while (gameState != GameState.GameOver)
       {
+         
          if (gameState != GameState.GameOver)
          {
-
             if (Score < 20)
             {
                _spawnedWordsPerTurn = 5;
@@ -160,8 +160,8 @@ public class GameManager : MonoBehaviour
                yield return new WaitForSeconds(_waitUntilNextWave);
                gameState = GameState.WaveStarted;
             }
-            
          }
+
       }
    }
 }

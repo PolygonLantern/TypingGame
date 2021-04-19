@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+[DefaultExecutionOrder(0)]
 public class WordManager : MonoBehaviour
 {
     public static int TimesFailedAWord;
@@ -35,7 +35,7 @@ public class WordManager : MonoBehaviour
     void AddWord(int currentID)
     {
         GameObject wordObject = _spawner.SpawnWord();
-        Word word = new Word(WordGenerator.GetRandomWord(), _spawner.GetDisplayWord(currentID, wordObject), currentID);
+        Word word = new Word(_singletonManager.WordGenerator.GetRandomName(), _spawner.GetDisplayWord(currentID, wordObject), currentID);
         wordObject.GetComponent<DisplayWord>().id = currentID;
         words.Add(word);
         _wordsGameObjects.Add(wordObject);
