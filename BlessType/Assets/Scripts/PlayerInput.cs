@@ -1,7 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// Class that listens for input from the player
+/// </summary>
 public class PlayerInput : MonoBehaviour
-{
+{ 
+    // Reference to the WordManager
     WordManager _wordManager;
 
     private void Start()
@@ -9,9 +13,9 @@ public class PlayerInput : MonoBehaviour
         _wordManager = GetComponent<WordManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Loop through each input character and try to type it
         foreach (char key in Input.inputString)
         {
             _wordManager.TypeLetter(key);

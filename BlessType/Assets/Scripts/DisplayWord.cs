@@ -71,32 +71,53 @@ public class DisplayWord : MonoBehaviour
         ChangeToTypingMaterial(gameObject);
     }
     
+    /// <summary>
+    /// Method that is called whenever a word is removed. Once the player has made 3 typos the colour will turn into black
+    /// and will destroy the object, if however the player types the word correctly the colour will turn green and will reset the typo counter 
+    /// </summary>
     public void RemoveWord()
     {
         if (WordManager.TimesFailedAWord >= 3)
         {
+            // Changes the colour to black
             ChangeToMistakenMaterial(gameObject);
         }
         else
         {
+            // Changes the colour to greeen
             ChangeToCorrectMaterial(gameObject);
         }
         
+        // Reset the typo counter
         WordManager.TimesFailedAWord = 0;
+        
+        // Destroy the object that word has been typed or mistaken
         Destroy(gameObject, .2f);
     }
 
+    /// <summary>
+    /// The method that will turn the colour of the object into black and will increase the mistakes counter which is displayed on the ui
+    /// </summary>
+    /// <param name="word"></param>
     void ChangeToMistakenMaterial(GameObject word)
     {
         GameManager.Mistakes++;
         word.GetComponent<Renderer>().material = _singletonManager.materials[2];
     }
     
+    /// <summary>
+    /// The method that changes the colour of the currently input word to yellow/orange or whatever colour is set to the 0th slot of the array 
+    /// </summary>
+    /// <param name="word"></param>
     void ChangeToTypingMaterial(GameObject word)
     {
         word.GetComponent<Renderer>().material = _singletonManager.materials[0];
     }
      
+    /// <summary>
+    /// The method that will change the colour of the object that word is being input to green and will increase the score counter
+    /// </summary>
+    /// <param name="word"></param>
     void ChangeToCorrectMaterial(GameObject word)
     {
         GameManager.Score++;

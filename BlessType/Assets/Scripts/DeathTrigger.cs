@@ -7,7 +7,7 @@ using UnityEngine;
 public class DeathTrigger : MonoBehaviour
 {
     private SingletonManager _singletonManager;
-
+    
     private void Start()
     {
         _singletonManager = SingletonManager.Instance;
@@ -25,6 +25,7 @@ public class DeathTrigger : MonoBehaviour
         // Increase the mistakes counter
         GameManager.Mistakes++;
         
+        //Clear the dictionary and the list from the word that has collided with the trigger
         _singletonManager.GameManager.RemoveWordFromDictionary(other.GetComponent<DisplayWord>().id);
         _singletonManager.WordManager.RemoveWordFromList(other.gameObject);
         
