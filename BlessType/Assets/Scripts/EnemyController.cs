@@ -11,7 +11,8 @@ public class EnemyController : MonoBehaviour
     private float _gravity = -9.81f;
     private bool _isGrounded;
     private Vector3 _velocity;
-    
+
+
     // Check for the collision. The range is the distance between the groundCheck gameObject and the groundLayered object 
     private float _range;
     
@@ -54,4 +55,5 @@ public class EnemyController : MonoBehaviour
         // Every frame move the character towards the velocity
         _controller.Move(_velocity * Time.deltaTime);
     }
+
 }

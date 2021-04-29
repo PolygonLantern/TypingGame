@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using TMPro;
 
 /// <summary>
@@ -6,6 +7,14 @@ using TMPro;
 /// </summary>
 public class DisplayWord : MonoBehaviour
 {
+    public AudioClip UIrightSound;
+
+    public AudioClip UIwrongSound;
+
+    public AudioClip DoneSound;
+
+    public GameObject holder;
+
     // Reference to the 3D text
     public TextMeshPro text;
 
@@ -90,9 +99,9 @@ public class DisplayWord : MonoBehaviour
         
         // Reset the typo counter
         WordManager.TimesFailedAWord = 0;
-        
+
         // Destroy the object that word has been typed or mistaken
-        Destroy(gameObject, .2f);
+        Destroy(gameObject, .4f);
     }
 
     /// <summary>
@@ -101,7 +110,7 @@ public class DisplayWord : MonoBehaviour
     /// <param name="word"></param>
     void ChangeToMistakenMaterial(GameObject word)
     {
-        GameManager.Mistakes++;
+        GameManager.Mistakes++; 
         word.GetComponent<Renderer>().material = _singletonManager.materials[2];
     }
     
@@ -122,6 +131,33 @@ public class DisplayWord : MonoBehaviour
     {
         GameManager.Score++;
         word.GetComponent<Renderer>().material = _singletonManager.materials[1];
+        AudioSource source = GetComponent<AudioSource>();
+        source.clip = DoneSound;
+        source.Play();
     }
-    
+
+    public void PlayParticle()
+    {
+        StartCoroutine(PlayParticleSystem(holder));
+
+    }
+
+    IEnumerator PlayParticleSystem(GameObject holder)
+    {
+        GameObject particle = Instantiate(holder,gameObject.transform);
+        ParticleSystem particleSystem = particle.GetComponentInChildren<ParticleSystem>();
+
+        particleSystem.Play();
+
+        yield return new WaitForSeconds(particleSystem.time);
+        Destroy(particle,1f);
+
+    }
+
+    public void playUISound()
+    {
+        AudioSource source = GetComponent<AudioSource>();
+        source.clip = UIrightSound;
+        source.Play();
+    }
 }

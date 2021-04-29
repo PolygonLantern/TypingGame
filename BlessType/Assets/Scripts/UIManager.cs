@@ -9,6 +9,8 @@ using UnityEngine.UI;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
+    public AudioSource UIsource;
+
     /// <summary>
     /// Public fields for the text that appears on the screen
     /// </summary>
@@ -57,6 +59,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     void Restart()
     {
+        UIsource.Play();
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
         _singletonManager.GameManager.gameState = GameState.WaveStarted;
@@ -69,6 +72,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     void ToMainMenu()
     {
+        UIsource.Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         _singletonManager.GameManager.gameState = GameState.Menu;
     }

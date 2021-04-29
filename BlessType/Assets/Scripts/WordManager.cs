@@ -8,6 +8,9 @@ using UnityEngine;
 [DefaultExecutionOrder(0)]
 public class WordManager : MonoBehaviour
 {
+
+    public AudioClip UIwrongSound;
+
     // Variable that keeps track of how many typos are being made per word
     public static int TimesFailedAWord;
     
@@ -101,6 +104,9 @@ public class WordManager : MonoBehaviour
             // if not, increase the typo counter
             else
             {
+                AudioSource source = GetComponent<AudioSource>();
+                source.clip = UIwrongSound;
+                source.Play();
                 ++TimesFailedAWord;
             }
         }

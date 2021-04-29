@@ -7,8 +7,8 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     // The pokemon's prefab
-    public GameObject wordPrefab;
-    
+    public GameObject[] wordPrefab;
+
     // Maximum range that the objects can be spawned
     public int maxRange = 30;
     
@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour
     /// <returns></returns>
     public GameObject SpawnWord()
     {
-        return Instantiate(wordPrefab, transform);
+        return Instantiate(wordPrefab[Random.Range(0, wordPrefab.Length)], transform);
     }
     
 }

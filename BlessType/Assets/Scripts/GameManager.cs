@@ -19,6 +19,11 @@ public enum GameState
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    public AudioClip waveStartClip;
+    public AudioClip gameOverClip;
+    public AudioSource theme;
+    private AudioSource source;
+
    // The score variable that is modified upon completion of a word. This is also used in the UIManager so it can be displayed on the UI 
    public static int Score;
    
@@ -39,9 +44,16 @@ public class GameManager : MonoBehaviour
    
    // Variable that is responsible for the amount of words showed on the screen. Modified upon reaching certain score
    private int _spawnedWordsPerTurn;
+
+    private bool checkFinish;
    
    private void Start()
    {
+        ResumeGame();
+        checkFinish = true;
+      // Getting the AudioSource for this gameObject
+      source = GetComponent<AudioSource>();
+
       // Setting the variables 
       Score = 0;
       Mistakes = 0;
@@ -68,13 +80,20 @@ public class GameManager : MonoBehaviour
       }
 
       // Check every frame if the mistakes that the player has made are not greater or equal to 5, if they are then set the game state to GameOver
-      if (Mistakes >= 5)
+      if (Mistakes >= 5 && checkFinish)
       {
          gameState = GameState.GameOver;
-      }
+            source.clip = gameOverClip;
+            source.Play();
+            theme.Stop();
+            checkFinish = false;
+            PauseGame();
 
-      // If the game state is GameOver, the Game Over UI panel will appear on the screen
-      _singletonManager.UIManager.gameOverPanel.SetActive(gameState == GameState.GameOver);
+        }
+
+            // If the game state is GameOver, the Game Over UI panel will appear on the screen
+            _singletonManager.UIManager.gameOverPanel.SetActive(gameState == GameState.GameOver);
+
    }
 
    /// <summary>
@@ -216,6 +235,9 @@ public class GameManager : MonoBehaviour
             // If the game state is WaveStarted, it spawns the words
             if (gameState == GameState.WaveStarted)
             {
+               source.clip = waveStartClip;
+               source.Play();
+                  
                for (int i = 0; i <= _spawnedWordsPerTurn; i++)
                {
                   _singletonManager.EventSystem.SpawnWord(i);
@@ -235,11 +257,21 @@ public class GameManager : MonoBehaviour
             if (gameState == GameState.WaveCompleted)
             {
                ClearLists();
-               yield return new WaitForSeconds(5f);
+               yield return new WaitForSeconds(4f);
                gameState = GameState.WaveStarted;
             }
          }
 
       }
    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
 }
