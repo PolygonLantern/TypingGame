@@ -7,12 +7,12 @@ using TMPro;
 /// </summary>
 public class DisplayWord : MonoBehaviour
 {
+    // A variable to hold all the sounds used for typing functionalities
     public AudioClip UIrightSound;
-
     public AudioClip UIwrongSound;
-
     public AudioClip DoneSound;
 
+    // This object is used to hold a particle system and activate every time when the player inputs the right letter
     public GameObject holder;
 
     // Reference to the 3D text
@@ -136,12 +136,14 @@ public class DisplayWord : MonoBehaviour
         source.Play();
     }
 
+    // Plays the particle after the player inputs the right letter
     public void PlayParticle()
     {
         StartCoroutine(PlayParticleSystem(holder));
 
     }
 
+    // Activates the holder particle that contains the particle effect to emit
     IEnumerator PlayParticleSystem(GameObject holder)
     {
         GameObject particle = Instantiate(holder,gameObject.transform);
@@ -154,6 +156,7 @@ public class DisplayWord : MonoBehaviour
 
     }
 
+    // A public method to be used whenever the sound for the UI utilized on a canvas
     public void playUISound()
     {
         AudioSource source = GetComponent<AudioSource>();

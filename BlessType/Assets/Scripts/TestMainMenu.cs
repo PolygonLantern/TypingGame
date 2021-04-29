@@ -6,6 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class TestMainMenu : MonoBehaviour
 {
+    // The AudioSource utilized to play the UI buttons
     private AudioSource source;
 
    // Reference to the button on the screen in the first scene

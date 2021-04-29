@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class Spawner : MonoBehaviour
 {
-    // The pokemon's prefab
+    // The pokemon's prefab utilizing an array to let us chose how many models we want to use
     public GameObject[] wordPrefab;
 
     // Maximum range that the objects can be spawned

@@ -8,7 +8,7 @@ using UnityEngine;
 [DefaultExecutionOrder(0)]
 public class WordManager : MonoBehaviour
 {
-
+    // The Audio Clip utilized to play the UI buttons when the player inputs the wrong letter with an active word
     public AudioClip UIwrongSound;
 
     // Variable that keeps track of how many typos are being made per word

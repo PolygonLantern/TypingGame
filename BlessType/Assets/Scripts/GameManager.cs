@@ -19,6 +19,7 @@ public enum GameState
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    // All the variables for the corresponding sounds effects utililized in game
     public AudioClip waveStartClip;
     public AudioClip gameOverClip;
     public AudioSource theme;
