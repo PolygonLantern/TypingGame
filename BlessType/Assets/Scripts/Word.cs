@@ -1,3 +1,6 @@
+using System.Collections;
+using UnityEngine;
+
 [System.Serializable]
 
 public class Word
@@ -45,7 +48,9 @@ public class Word
    public void InputChar()
    {
       charIndex++;
-      displayWord.RemoveChar(charIndex);
+        displayWord.playUISound();
+        displayWord.PlayParticle();
+        displayWord.RemoveChar(charIndex);
    }
    
    /// <summary>
@@ -66,5 +71,6 @@ public class Word
       
       return wordTyped;
    }
-   
+
+
 }

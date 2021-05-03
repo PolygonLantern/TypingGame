@@ -6,6 +6,9 @@ using UnityEngine.UI;
 /// </summary>
 public class TestMainMenu : MonoBehaviour
 {
+    // The AudioSource utilized to play the UI buttons
+    private AudioSource source;
+
    // Reference to the button on the screen in the first scene
    public Button playButton;
    
@@ -17,6 +20,8 @@ public class TestMainMenu : MonoBehaviour
 
    private void Start()
    {
+        source = GetComponent<AudioSource>();
+
       _singletonManager = SingletonManager.Instance;
       // Check if the isReady is true, and if its not call the LoadPokemon method to start doing requests to the pokemon API
       if (!_readyToLoadLevel)
@@ -35,8 +40,10 @@ public class TestMainMenu : MonoBehaviour
    /// </summary>
    void LoadWords()
    {
-      if (_readyToLoadLevel)
+        source.Play();
+        if (_readyToLoadLevel)
       {
+
          SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
       }
    }
